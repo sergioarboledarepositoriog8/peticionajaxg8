@@ -2,7 +2,7 @@
  * endpoint donde se va consumir la api rest
  */
 const endpoint = "https://gdcdc7d0011250f-db202109232125.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/producto/producto/"
-
+const etp=document.getElementById("informacion")
 /**
  * consumiento metodo get la Api de Cloud para visualizar en el cliente 
  */
@@ -15,6 +15,7 @@ function peticionGet() {
         url: endpoint,
         success: function (data) {
             //console.log(data)
+            getProducto(data.items)
             mostrarProducto(data.items)
 
 
@@ -24,6 +25,23 @@ function peticionGet() {
         }
     });
 
+}
+
+
+function getProducto(productos){
+  
+    let cadena=""
+    
+    productos.forEach(producto=>{
+        cadena+="<p>Codigo:"+producto.codprod+"</p>"+
+                "<p>Producto:"+producto.nomprod+"</p>"+
+                "<p>Precio:"+producto.precio+"</p>"+
+                "<p>Inventario:"+producto.inventario+"</p>"
+    }
+    );
+    console.log(etp)
+    console.log(cadena)
+    etp.innerHTML=cadena
 }
 
 /**
